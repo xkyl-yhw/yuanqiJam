@@ -17,7 +17,7 @@ public class CarMove : MonoBehaviour
         {
             return _Instance;
         }
-        
+
     }
 
     float h;
@@ -39,7 +39,7 @@ public class CarMove : MonoBehaviour
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        if (v!=0)
+        if (v != 0)
         {
             if (v > 0)
             {
@@ -50,8 +50,8 @@ public class CarMove : MonoBehaviour
                 BackPoCheck();
             }
             float realspeed = RealSpeed();//计算真实速度
-            Debug.Log("realspeed"+realspeed);
-            transform.Translate(Vector3.forward * Time.deltaTime*v*realspeed);
+            Debug.Log("realspeed" + realspeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * v * realspeed);
             if (h != 0)
             {
                 if (v > 0)
@@ -60,7 +60,7 @@ public class CarMove : MonoBehaviour
                 }
                 else
                 {
-                    transform.Rotate(Vector3.up * Time.deltaTime * h * roateSpeed*-1);
+                    transform.Rotate(Vector3.up * Time.deltaTime * h * roateSpeed * -1);
                 }
             }
         }
@@ -85,7 +85,7 @@ public class CarMove : MonoBehaviour
     }
     public void SetRoateSpeed(float a)
     {
-        if(a<60&&a>20)
+        if (a < 60 && a > 20)
         {
             roateSpeed = a;
         }
@@ -93,7 +93,7 @@ public class CarMove : MonoBehaviour
 
     float RealSpeed()//计算真实速度
     {
-        float sp = carSpeed+addSpeed - weight * friction;
+        float sp = carSpeed + addSpeed - weight * friction;
         if (sp < 5)//保证有一个最小速度
         {
             sp = 5f;
@@ -103,7 +103,7 @@ public class CarMove : MonoBehaviour
 
     void FrontPoCheck()//前进时检测坡
     {
-       
+
         Vector3 nextPos = transform.position;
         Ray thisray = new Ray(nextPos, Vector3.down);//将车本身的图层设为ignore
         RaycastHit hitme;
@@ -114,10 +114,10 @@ public class CarMove : MonoBehaviour
         else
         {
         }
-       
 
 
-        Vector3 tempPos = transform.rotation * Vector3.forward * (10+addSpeed-weight*friction) * 0.1f;
+
+        Vector3 tempPos = transform.rotation * Vector3.forward * (10 + addSpeed - weight * friction) * 0.1f;
         Vector3 realPos = nextPos + tempPos + new Vector3(0, 10, 0);
         Ray ray = new Ray(realPos, Vector3.down);
         RaycastHit hit;
@@ -125,7 +125,7 @@ public class CarMove : MonoBehaviour
         {
             if (hit.collider == null)
             {
-                
+
             }
             else
             {
@@ -133,28 +133,28 @@ public class CarMove : MonoBehaviour
             }
         }
 
-        if(realPos.y>nextPos.y)//上坡
+        if (realPos.y > nextPos.y)//上坡
         {
-          
+
             float xiebian = tempPos.magnitude;
             float zhibian = Mathf.Abs(realPos.y - nextPos.y); //直角边
             if (xiebian > zhibian && xiebian > 0 && zhibian > 0)
             {
-                carSpeed = Mathf.Sqrt(xiebian * xiebian - zhibian * zhibian)*10;//速度 
+                carSpeed = Mathf.Sqrt(xiebian * xiebian - zhibian * zhibian) * 10;//速度 
             }
             else
             {
                 carSpeed = 10;
             }
         }
-        else if(realPos.y == nextPos.y)//平地
+        else if (realPos.y == nextPos.y)//平地
         {
 
             carSpeed = 10;
         }
         else//下坡
         {
-  
+
             carSpeed = 15;
         }
     }
@@ -175,7 +175,7 @@ public class CarMove : MonoBehaviour
 
 
 
-        Vector3 tempPos = transform.rotation * Vector3.forward * (10 + addSpeed - weight * friction) * 0.1f*-1;
+        Vector3 tempPos = transform.rotation * Vector3.forward * (10 + addSpeed - weight * friction) * 0.1f * -1;
         Vector3 realPos = nextPos + tempPos + new Vector3(0, 10, 0);
         Ray ray = new Ray(realPos, Vector3.down);
         RaycastHit hit;

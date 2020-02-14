@@ -13,7 +13,8 @@ public class ThirdPerson : MonoBehaviour
     private float rotDegree = 0;
     private float rollDegree = 30;
     private float rot, roll;
-    private Vector3 moveDir;
+    [HideInInspector]
+    public Vector3 moveDir,moveDirR;
 
     private void Start()
     {
@@ -22,13 +23,14 @@ public class ThirdPerson : MonoBehaviour
 
     private void Update()
     {
-        moveInput();
+        cameraRot();
+        //moveInput();
     }
 
     private void FixedUpdate()
     {
-        playerMove();
-        cameraRot();
+        //playerMove();
+        
     }
 
     private void playerMove()
@@ -40,7 +42,8 @@ public class ThirdPerson : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        moveDir = v * Vector3.ProjectOnPlane(ThirdCam.transform.forward, transform.up) + h * Vector3.ProjectOnPlane(ThirdCam.transform.right, transform.up);
+        moveDir = v * Vector3.ProjectOnPlane(ThirdCam.transform.forward, transform.up).normalized;
+        moveDirR = h * Vector3.ProjectOnPlane(ThirdCam.transform.right, transform.up).normalized;
     }
 
     private void cameraRot()
