@@ -13013,7 +13013,9 @@ PrefabInstance:
       propertyPath: roateSpeed
       value: 80
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1868386748315898127, guid: 0da971a73e2790142aa33ea44282560e, type: 3}
+    - {fileID: 1868386748315898126, guid: 0da971a73e2790142aa33ea44282560e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0da971a73e2790142aa33ea44282560e, type: 3}
 --- !u!1 &1417200340
 GameObject:
