@@ -5,9 +5,9 @@ using UnityEngine;
 public class CarMove : MonoBehaviour
 {
 
-    float carSpeed = 20;//基础速度
+    public float carSpeed = 10;//基础速度
     float addSpeed = 0;//通过装备增加的前进速度
-    float roateSpeed = 30;//转动速度
+    public float roateSpeed = 30;//转动速度
     float weight = 0;//负重
     float friction = 0.5f;//摩擦系数
     private static CarMove _Instance;
@@ -87,9 +87,9 @@ public class CarMove : MonoBehaviour
     float RealSpeed()//计算真实速度
     {
         float sp = carSpeed+addSpeed - weight * friction;
-        if (sp < 10)//保证有一个最小速度
+        if (sp < 5)//保证有一个最小速度
         {
-            sp = 10f;
+            sp = 5f;
         }
         return sp;
     }
@@ -108,8 +108,8 @@ public class CarMove : MonoBehaviour
         }
        
 
-        float sp1 = RealSpeed();
-        Vector3 tempPos = transform.rotation * Vector3.forward * sp1 * 0.1f;
+
+        Vector3 tempPos = transform.rotation * Vector3.forward * (10+addSpeed-weight*friction) * 0.1f;
         Vector3 realPos = nextPos + tempPos + new Vector3(0, 10, 0);
         Ray ray = new Ray(realPos, Vector3.down);
         RaycastHit hit;
@@ -131,20 +131,20 @@ public class CarMove : MonoBehaviour
             float zhibian = Mathf.Abs(realPos.y - nextPos.y); //直角边
             if (xiebian > zhibian && xiebian > 0 && zhibian > 0)
             {
-                carSpeed = Mathf.Sqrt(xiebian * xiebian - zhibian * zhibian);//速度 
+                carSpeed = Mathf.Sqrt(xiebian * xiebian - zhibian * zhibian)*9;//速度 
             }
             else
             {
-                carSpeed = 20;
+                carSpeed = 10;
             }
         }
         else if(realPos.y == nextPos.y)//平地
         {
-            carSpeed = 20;
+            carSpeed = 10;
         }
         else//下坡
         {
-            carSpeed = 20;
+            carSpeed = 15;
         }
     }
 
