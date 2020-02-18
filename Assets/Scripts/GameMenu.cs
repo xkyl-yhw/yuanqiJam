@@ -10,13 +10,15 @@ public class GameMenu : MonoBehaviour
     public Text coinsText;
     public GameObject shopMenu;
     public GameObject[] insForItems;
+    private GameObject player;
 
     List<GameObject> shopList = new List<GameObject>();
 
 
     private void Start()
     {
-        //shopInitMethod();
+        player = GameObject.FindGameObjectWithTag("Player");
+        shopInitMethod();
     }
 
     private void Update()
@@ -51,19 +53,13 @@ public class GameMenu : MonoBehaviour
     public void closeShop()
     {
         shopList.Clear();
-        for (int i = 0; i < shopMenu.transform.childCount; i++)
-        {
-            Destroy(shopMenu.transform.GetChild(0).GetChild(i).gameObject);
-        }
         shopMenu.SetActive(false);
-        SceneManager.LoadScene(0);
-
+        player.GetComponent<CarMove>().enabled = true;
     }
 
 
     public void shopInitMethod()
     {
-        shopMenu.SetActive(true);
         if (GameManager.maxNumItem[(int)itemList.wire] > 0)
         {
             shopList.Add(insForItems[(int)itemList.wire]);
@@ -92,5 +88,10 @@ public class GameMenu : MonoBehaviour
         {
             Instantiate(shopList[i], shopMenu.transform.GetChild(0).transform);
         }
+    }
+
+    public void openShop()
+    {
+        shopMenu.SetActive(true);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThirdPerson : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class ThirdPerson : MonoBehaviour
 
     private void Update()
     {
-        cameraRot();
+        //cameraRot();
         //moveInput();
     }
 
@@ -73,7 +74,11 @@ public class ThirdPerson : MonoBehaviour
         if (collision.collider.tag == "shop")
         {
             this.GetComponent<CarMove>().enabled = false;
-            GameManager.instance.gameMenu.shopInitMethod();
+            GameManager.instance.gameMenu.openShop();
+        }
+        else if (collision.collider.tag == "home")
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

@@ -44,6 +44,12 @@ public class GameManager : MonoBehaviour
         createCity();
         information.day++;
         information.energy -= 2;
+        information.food--;
+        if (information.food < 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+
         preTime = Time.time;
         gameMenu = GameObject.FindObjectOfType<GameMenu>().GetComponent<GameMenu>();
         createMotor = false;
@@ -78,6 +84,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (information.mask == 1)
+        {
+            SceneManager.LoadScene(3);
+        }
         day = information.day;
         coins = information.money;
         if (Time.time - preTime < onceTime)
@@ -103,9 +113,9 @@ public class GameManager : MonoBehaviour
         {
             int x = Random.Range(1, 9);
             int y = Random.Range(1, 7);
-            if (placeMarker[x-1, y-1] != 1)
+            if (placeMarker[x - 1, y - 1] != 1)
                 Instantiate(shopIns, startPos + new Vector3((int)(x / 2) * 12 + (x % 2 == 0 ? -1 : 1) * 4, 0, (int)(y / 2) * 12 + (y % 2 == 0 ? -1 : 1) * 4), Quaternion.identity);
-            placeMarker[x-1, y-1] = 1;
+            placeMarker[x - 1, y - 1] = 1;
         }
         for (int i = 0; i < placeMarker.GetLength(0); i++)
         {
@@ -114,7 +124,7 @@ public class GameManager : MonoBehaviour
                 if (placeMarker[i, j] == 0)
                 {
                     int ramdonNum = Random.Range(0, buildingIns.Length);
-                    Instantiate(buildingIns[ramdonNum], startPos + new Vector3((int)((i+1) / 2) * 12 + ((i+1) % 2 == 0 ? -1 : 1) * 4, 0, (int)((j+1) / 2) * 12 + ((j+1) % 2 == 0 ? -1 : 1) * 4), Quaternion.identity);
+                    Instantiate(buildingIns[ramdonNum], startPos + new Vector3((int)((i + 1) / 2) * 12 + ((i + 1) % 2 == 0 ? -1 : 1) * 4, 0, (int)((j + 1) / 2) * 12 + ((j + 1) % 2 == 0 ? -1 : 1) * 4), Quaternion.identity);
                 }
             }
         }
