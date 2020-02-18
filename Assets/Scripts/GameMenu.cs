@@ -11,6 +11,7 @@ public class GameMenu : MonoBehaviour
     public GameObject shopMenu;
     public GameObject[] insForItems;
     private GameObject player;
+    public Text PerText;
 
     List<GameObject> shopList = new List<GameObject>();
 
@@ -41,6 +42,10 @@ public class GameMenu : MonoBehaviour
         {
             foreach (RaycastResult item in results)
             {
+                    if (item.gameObject == PerText.gameObject)
+                    {
+                        PerText.gameObject.SetActive(false);
+                    }
                 if (item.gameObject.GetComponent<purchaseItem>() != null)
                 {
                     item.gameObject.GetComponent<purchaseItem>().itemEffect();

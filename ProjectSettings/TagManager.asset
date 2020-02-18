@@ -6,6 +6,10 @@ TagManager:
   tags:
   - shop
   - home
+  - factory
+  - Person1
+  - Person2
+  - Person3
   layers:
   - Default
   - TransparentFX

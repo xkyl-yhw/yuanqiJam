@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameMenu gameMenu;
     public Text timeUi;
+    public int maskDay = 0;
 
     [SerializeField]
     public static int[] maxNumItem = { 4, 1, 5, 2, 6, 1 };
@@ -67,17 +68,16 @@ public class GameManager : MonoBehaviour
                 createMotor = true;
             }
         }
+        if (maskDay == 0)
+        {
+            maskDay = Random.Range(5, 9);
+        }
 
         if (maxNumItem[(int)itemList.mask] > 0)
         {
-            if (day > 5 && day < 8)
+            if (day >= maskDay)
             {
-                createMotor = Random.value > 0.5;
-
-            }
-            else if (day == 8)
-            {
-                createMotor = true;
+                createMask = true;
             }
         }
     }
