@@ -41,6 +41,7 @@ public class CarMove : MonoBehaviour
         v = Input.GetAxis("Vertical");
         if (v != 0)
         {
+            /*
             if (v > 0)
             {
                 FrontPoCheck();
@@ -48,9 +49,9 @@ public class CarMove : MonoBehaviour
             else
             {
                 BackPoCheck();
-            }
-            float realspeed = RealSpeed();//计算真实速度
-            transform.Translate(Vector3.forward * Time.deltaTime * v * realspeed);
+            }*/
+            //float realspeed = RealSpeed();//计算真实速度
+            transform.Translate(Vector3.forward * Time.deltaTime * v * carSpeed);
             if (h != 0)
             {
                 if (v > 0)
