@@ -50,7 +50,6 @@ public class CarMove : MonoBehaviour
                 BackPoCheck();
             }
             float realspeed = RealSpeed();//计算真实速度
-            Debug.Log("realspeed" + realspeed);
             transform.Translate(Vector3.forward * Time.deltaTime * v * realspeed);
             if (h != 0)
             {

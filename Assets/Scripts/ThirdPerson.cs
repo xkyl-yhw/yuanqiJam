@@ -67,4 +67,13 @@ public class ThirdPerson : MonoBehaviour
         ThirdCam.transform.position = cameraPos;
         ThirdCam.transform.LookAt(this.transform.position);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "shop")
+        {
+            this.GetComponent<CarMove>().enabled = false;
+            GameManager.instance.gameMenu.shopInitMethod();
+        }
+    }
 }

@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class Money : MonoBehaviour
 {
-    private GameObject car;//信息
     // Start is called before the first frame update
     void Start()
     {
-        car = GameObject.FindWithTag("information");
-        this.transform.GetComponent<Text>().text = car.GetComponent<information>().money.ToString();//每次加载场景会读取
+        this.transform.GetComponent<Text>().text = information.money.ToString();//每次加载场景会读取
     }
 
     // Update is called once per frame
